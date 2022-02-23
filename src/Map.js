@@ -1,16 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {
-  MapLayout,
-  BottomNav,
-  ScanBottomNavTxt,
-  ScanButtonBottomNav,
-  AccountIcon,
-  HelpIcon,
+  MapLayout
 } from "./styles/mapstyles";
-import scanSVG from "../src/styles/svgs/scan.svg";
-import accSVG from "../src/styles/svgs/account.svg";
-import helpSVG from "../src/styles/svgs/help.svg";
 
 const mapStyles = {
   map: {
@@ -37,7 +29,6 @@ export class CurrentLocation extends React.Component {
 
   FavoritePosition() {
     const map = this.map;
-    const current = this.state.currentLocation;
     const google = this.props.google;
     const maps = google.maps;
 
@@ -53,11 +44,6 @@ export class CurrentLocation extends React.Component {
   }
 
   ChangeZoom() {
-    const map = this.map;
-    const current = this.state.currentLocation;
-    const google = this.props.google;
-    const maps = google.maps;
-
     this.setState({
       zoomLevel: 13,
     });
@@ -116,7 +102,6 @@ export class CurrentLocation extends React.Component {
       // reference to the actual DOM element
       const node = ReactDOM.findDOMNode(mapRef);
 
-      let { zoom } = this.props;
       const { lat, lng } = this.state.currentLocation;
       const center = new maps.LatLng(lat, lng);
 

@@ -1,12 +1,9 @@
-import logo from "./logo.svg";
 import "./App.css";
-import React, { Component, PropTypes } from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 
-import { Map, GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
-import Handlebars from "handlebars/dist/cjs/handlebars";
+import { GoogleApiWrapper, InfoWindow, Marker } from "google-maps-react";
 import {
-  MapLayout,
   MainLayout,
   PanelStyles,
   LocationName,
@@ -27,11 +24,10 @@ import close from "../src/styles/svgs/close.svg";
 import CurrentLocationIcon from "../src/styles/svgs/Location.svg";
 import paws from "../src/styles/svgs/paws.png";
 import Activepaws from "../src/styles/svgs/ActivePaws.png";
-import { Panel, PanelGroup } from "rsuite";
 import CurrentLocation from "./Map";
 import { database, signInwithG, auth } from "./utilities/firebase.js";
 
-import { getDatabase, onValue, ref, set, on } from "firebase/database";
+import { onValue, ref} from "firebase/database";
 
 import scanSVG from "../src/styles/svgs/scan.svg";
 import accSVG from "../src/styles/svgs/account.svg";
@@ -39,7 +35,6 @@ import helpSVG from "../src/styles/svgs/help.svg";
 import topLogo from "../src/styles/svgs/SpotLogos.png";
 
 import Profile from "./Profile.js"
-const google = window.google;
 
 
 /**
@@ -111,7 +106,7 @@ export const ProfileButton = () => (
         ReactDOM.render(<Profile />, document.getElementById("root"))
       }
     > */}
-      <input type="image" src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
+      <input type="image" alt="Account Button" src={accSVG} name="saveForm" className="btTxt submit" onClick={() =>
         ReactDOM.render(<Profile />, document.getElementById("root"))
       } >
 
@@ -150,7 +145,7 @@ export class MapContainer extends Component {
 
   // }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker) =>
     this.setState({
       selectedPlace: props,
       activeMarker: marker,
@@ -199,14 +194,14 @@ export class MapContainer extends Component {
         <div id="outline">
           <MainLayout>
             <TopBanner>
-              <img src={topLogo} width="96px" />
+              <img src={topLogo} alt="Logo" width="96px" />
             </TopBanner>
             {/* <SignInButton/> */}
 
             <div id='user-info'>
               {this.state.currentUser ? (<div>
                 <div>
-                  <img src={this.state.currentUser.photoURL} />
+                  <img src={this.state.currentUser.photoURL} alt="Profile"/>
                 </div>
                 <div>Name: {this.state.currentUser.displayName}</div>
                 <div>Email: {this.state.currentUser.email}</div>
@@ -261,11 +256,11 @@ export class MapContainer extends Component {
                 {/* <img src={accSVG} /> */}
               </AccountIcon>
               <ScanButtonBottomNav>
-                <img src={scanSVG} />
+                <img src={scanSVG} alt="QR Scanner"/>
                 <ScanBottomNavTxt>SCAN</ScanBottomNavTxt>
               </ScanButtonBottomNav>
               <HelpIcon>
-                <img src={helpSVG} />
+                <img src={helpSVG} alt="help button"/>
               </HelpIcon>
             </BottomNav>
             {this.state.showingInfoWindow ? (
@@ -276,6 +271,7 @@ export class MapContainer extends Component {
               >
                 <img
                   src={close}
+                  alt="close"
                   onClick={() =>
                     this.setState({
                       showingInfoWindow: false,
